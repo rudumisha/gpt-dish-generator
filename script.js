@@ -3,14 +3,17 @@ async function generateRecipe() {
   const output = document.getElementById("output");
   output.textContent = "Генерація...";
 
-  const res = await fetch("/api/gpt", {
+  const res = await fetch("https://gpt-dish-generator.vercel.app/api/gpt", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       messages: [
-        { role: "user", content: `Придумай простий український рецепт з інгредієнтом "${input}". Додай назву, інгредієнти та спосіб приготування.` }
-      ]
-    })
+        {
+          role: "user",
+          content: `Придумай простий український рецепт з інгредієнтом "${input}". Додай назву, інгредієнти та спосіб приготування.`,
+        },
+      ],
+    }),
   });
 
   const data = await res.json();
